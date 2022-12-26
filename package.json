@@ -1,0 +1,46 @@
+{
+  "name": "vite-plugin-vue-island",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "sylx",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylx/vite-plugin-vue-island.git",
+    "directory": ""
+  },
+  "bugs": {
+    "url": "https://github.com/sylx/vite-plugin-vue-island/issues"
+  },
+  "homepage": "https://github.com/sylx/vite-plugin-vue-island#readme",
+  "peerDependencies": {
+    "vite": "^4.0.0",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "unbuild": "^0.9.4",
+    "vite": "^4.0.0",
+    "vue": "^3.2.25",
+    "@types/jsdom": "^20.0.1",
+    "jsdom": "^20.0.3"    
+  },
+}
