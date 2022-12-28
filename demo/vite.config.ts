@@ -1,6 +1,7 @@
 import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueIslandPlugin from '../dist/index.mjs'
+import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
   resolve: {
@@ -8,6 +9,10 @@ export default defineConfig({
     },
   },
   plugins: [
+    Inspect({
+      build: true,
+      outputDir: 'dist/.vite-inspect'
+    }),
     vuePlugin({
     }),
     vueIslandPlugin({
