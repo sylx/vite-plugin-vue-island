@@ -42,7 +42,7 @@ export function mountApp(appFactory: AppFactory): App<Element>[]{
     return renderInfos.map(info=>{
         console.log(info)
         const app=appFactory(info.render,info)
-        app.mount(`[data-vue-island]`)
+        app.mount(`[data-vue-island]`) //TODO: use id
         return app
     })
 }

@@ -1,5 +1,5 @@
 declare module '*?vue-island' {
-    import type { RenderFunction } from 'vue'
+    export { AppFactory, RenderInfo, getRender, mountApp, registerRender } from 'vue-island'
 }
 
 declare module '*.vue' {

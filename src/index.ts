@@ -1,7 +1,8 @@
 import type { Plugin } from 'vite'
 import { parse, compileTemplate } from "vue/compiler-sfc"
 import { SFCDescriptor, SFCTemplateCompileOptions } from 'vue/compiler-sfc'
-//import * as fs from "node:fs"
+import { readFileSync } from "node:fs"
+import { resolve } from "node:path"
 import { SAXParser, StartTag, EndTag, Comment } from "/Users/angel.yagura/project/vite-plugin-vue-island/node_modules/parse5-sax-parser/dist/index.js"
 
 type PageEntry = {
@@ -57,7 +58,7 @@ export default function VueIslandPlugin(rawOptions: Options = {}): Plugin {
             const query = Object.fromEntries(new URLSearchParams(rawQuery))
             if (query['vue-island'] == null) return
             const predicate = rawOptions.predicate ?? { type: "attribute", search: "data-vue-island" }
-            const results=extractIsland(code, predicate).map(({ html, startOffset, endOffset }) => transformHtmlToCode(html,"hoge",{},this))
+            const results = extractIsland(code, predicate).map(({ html, startOffset, endOffset }) => transformHtmlToCode(html, "hoge", {}, this))
             return {
                 code: joinResultsCode(results)
             }
@@ -119,7 +120,7 @@ function extractIsland(html: string, predicate: IslandPredicate) {
         case "comment":
             parser.on("comment", ({ text, sourceCodeLocation }: Comment) => {
                 if (!sourceCodeLocation) throw new Error("invalid sax parser")
-                const normalizedText=text.trim()
+                const normalizedText = text.trim()
                 if ((predicate.regex && normalizedText.match(predicate.regex)) || normalizedText === predicate.search) {
                     if (!openOffset) {
                         openOffset = sourceCodeLocation.endOffset
@@ -153,15 +154,14 @@ function transformHtmlToCode(html: string, id: string, options: any, pluginConte
 function joinResultsCode(results: any[]) {
     const code = [
         `import * as Vue from "vue"`,
-        `import * as _runtime from "../runtime/dist/runtime.mjs"`,
+        readFileSync(resolve(__dirname, "../runtime/dist/runtime.mjs"), "utf-8"), //expand inline!!!
     ]
     const id = "hoge"
     const filename = "hoge.html"
-    results.forEach((r,index) => {
+    results.forEach((r, index) => {
         code.push(`/* register render at ${index} */`)
-        code.push(`_runtime.registerRender((function(){${r.code}})(),"${id}","${filename}")`)
+        code.push(`registerRender((function(){${r.code}})(),"${id}","${filename}")`)
     })
-    code.push(`export const mountApp = _runtime.mountApp`)
     return code.join("\n")
 }
 
