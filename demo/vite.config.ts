@@ -1,6 +1,6 @@
 import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
-import vueIslandPlugin from '../dist/index.mjs'
+import vueIslandPlugin from '../dist/index'
 import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
@@ -22,21 +22,12 @@ export default defineConfig({
   ],
   build: {
     // to make tests faster
-    minify: false,
+    minify: 'esbuild',
+    target: "es2015",
     rollupOptions: {
       output: {
-        // Test splitVendorChunkPlugin composition
-        manualChunks(id) {
-          if (id.includes('src-import')) {
-            return 'src-import'
-          }
-        },
+        format: 'iife'
       },
     },
-  },
-  css: {
-    modules: {
-      localsConvention: 'camelCaseOnly',
-    },
-  },
+  }
 })

@@ -4,7 +4,6 @@ import Hello from "./Hello.vue"
 const { createApp } = Vue
 
 mountApp((render, renderInfo) => {
-    console.log(renderInfo)
     return createApp({
         components: {
             Hello
