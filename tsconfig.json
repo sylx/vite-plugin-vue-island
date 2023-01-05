@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "runtime/src/runtime.ts"],
   "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
     "outDir": "dist",

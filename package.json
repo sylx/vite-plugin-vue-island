@@ -18,7 +18,8 @@
   },
   "scripts": {
     "dev": "unbuild --stub",
-    "build": "unbuild"
+    "build": "unbuild runtime && unbuild",
+    "build:runtime": "unbuild runtime"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
@@ -37,10 +38,10 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@types/jsdom": "^20.0.1",
+    "parse5-sax-parser": "^7.0.0",
     "unbuild": "^0.9.4",
     "vite": "^4.0.0",
-    "vue": "^3.2.25",
-    "@types/jsdom": "^20.0.1",
-    "jsdom": "^20.0.3"    
+    "vue": "^3.2.25"
   }
 }

@@ -1,7 +1,5 @@
 declare module '*?vue-island' {
     import type { RenderFunction } from 'vue'
-    const getRender: (any) => RenderFunction
-    export default getRender
 }
 
 declare module '*.vue' {
