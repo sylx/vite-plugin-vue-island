@@ -154,12 +154,14 @@ function transformHtmlToCode(html: string, id: string, options: any, pluginConte
 function joinResultsCode(results: any[]) {
     const code = [
         `import * as Vue from "vue"`,
+        `/*** runtime ***/`,
         readFileSync(resolve(__dirname, "../runtime/dist/runtime.mjs"), "utf-8"), //expand inline!!!
+        `/*** runtime ***/`,
     ]
     const id = "hoge"
     const filename = "hoge.html"
     results.forEach((r, index) => {
-        code.push(`/* register render at ${index} */`)
+        code.push(`/* register render at ${index} from ${filename} #${id} */`)
         code.push(`registerRender((function(){${r.code}})(),"${id}","${filename}")`)
     })
     return code.join("\n")
