@@ -11,7 +11,6 @@ export type AppFactory = (render: RenderFunction,renderInfo: RenderInfo) => App<
 const renderInfos = [] as RenderInfo[]
 
 export function registerRender(render: RenderFunction,id: string,filename: string): void{
-    console.log("register",render,id,filename)
     renderInfos.push({
         id,
         filename,

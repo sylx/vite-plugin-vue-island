@@ -3,7 +3,7 @@ import { parse, compileTemplate } from "vue/compiler-sfc"
 import { SFCDescriptor, SFCTemplateCompileOptions } from 'vue/compiler-sfc'
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
-import { SAXParser, StartTag, EndTag, Comment } from "/Users/angel.yagura/project/vite-plugin-vue-island/node_modules/parse5-sax-parser/dist/index.js"
+import { SAXParser, StartTag, EndTag, Comment } from "parse5-sax-parser"
 
 type PageEntry = {
     [key: string]: string
